@@ -13,14 +13,14 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false)
     private UUID id;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 25, name = "first_name")
     private String firstname;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 25, name = "last_name")
     private String lastname;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role")
     private Role role;
 
 

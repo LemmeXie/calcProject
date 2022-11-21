@@ -24,14 +24,20 @@ public class UserRestController {
         return userRepository.findAll();
     }
 
-    @PostMapping
-    public User create(@RequestBody User user){
-        return userRepository.save(user);
-    }
-
     @GetMapping("/{id}")
     public User getById(@PathVariable("id")UUID id){
         return userRepository.findById(id).get();
+    }
+
+    @PostMapping
+    public User create(@RequestBody User user){
+        UUID id = user.getId();
+        if(id !=null){
+            if(userRepository.existsById(user.getId())){
+                throw new EntityExistsException("User already exists");
+            }
+        }
+        return userRepository.save(user);
     }
 
     @PutMapping
