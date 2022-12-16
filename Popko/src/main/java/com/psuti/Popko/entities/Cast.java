@@ -1,8 +1,13 @@
 package com.psuti.Popko.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "cast")
 public class Cast {
@@ -19,40 +24,6 @@ public class Cast {
     public Film film;
 
     @ManyToOne
-    @JoinColumn(name = "id_actor")
-    public Actor actor;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-    public void setFilmName(String name){
-        film.setName(name);}
-
-    public Actor getActor() {
-        return actor;
-    }
-
-    public void setActor(Actor actor) {
-        this.actor = actor;
-    }
+    @JoinColumn(name = "id_user")
+    public User user;
 }

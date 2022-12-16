@@ -1,6 +1,6 @@
 package com.psuti.Popko.controller;
 
-import com.psuti.Popko.dao.ActorRepository;
+import com.psuti.Popko.dao.UserRepository;
 import com.psuti.Popko.dao.CastRepository;
 import com.psuti.Popko.dao.FilmRepository;
 import com.psuti.Popko.entities.Cast;
@@ -14,14 +14,14 @@ import java.util.UUID;
 @RestController
 public class CastRestController {
     private final CastRepository CastRepository;
-    private final ActorRepository ActorRepository;
+    private final UserRepository UserRepository;
     private final FilmRepository FilmRepository;
-    private ActorRestController actorRestController;
+    private UserRestController userRestController;
     private FilmRestController filmRestController;
 
-    public CastRestController(CastRepository CastRepository, com.psuti.Popko.dao.ActorRepository actorRepository, com.psuti.Popko.dao.FilmRepository filmRepository) {
+    public CastRestController(CastRepository CastRepository, com.psuti.Popko.dao.UserRepository userRepository, com.psuti.Popko.dao.FilmRepository filmRepository) {
         this.CastRepository=CastRepository;
-        ActorRepository = actorRepository;
+        UserRepository = userRepository;
         FilmRepository = filmRepository;
     }
 
@@ -46,12 +46,13 @@ public class CastRestController {
                 throw new EntityExistsException("Cast already exists");
             }
         }
-        if(!ActorRepository.findByName(cast.actor.getName()).isEmpty())
-        {
-            actorRestController.create(cast.actor);
+        if (cast.getName().isEmpty()) {
+            throw new EntityExistsException("Name empty");
         }
-        if (!FilmRepository.findByName(cast.film.getName()).isEmpty())
-        {
+        if (!UserRepository.findByFirstname(cast.user.getFirstname()).isEmpty()) {
+            userRestController.create(cast.user);
+        }
+        if (!FilmRepository.findByName(cast.film.getName()).isEmpty()) {
             filmRestController.create(cast.film);
         }
         return CastRepository.save(cast);

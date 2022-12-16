@@ -1,11 +1,14 @@
 package com.psuti.Popko.entities;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
@@ -15,20 +18,4 @@ public class Role implements Serializable {
     private UUID id;
     @Column(nullable = false,length = 25,name = "name")
     private String name;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
