@@ -1,0 +1,711 @@
+INSERT INTO public.calculation_status (id, name)
+VALUES (1::integer, 'актуален'::varchar);
+
+INSERT INTO public.calculation_status (id, name)
+VALUES (2::integer, 'не актуален'::varchar);
+
+INSERT INTO public.calculation_status (id, name)
+VALUES (3::integer, 'договор заключен'::varchar);
+
+
+
+INSERT INTO public.customers (id, last_name, first_name, second_name, phone, email, address)
+VALUES (1::integer, 'Абаттов'::varchar, 'Андрей'::varchar, 'Иванович'::varchar, 89273221322::bigint,
+        'andreiva@gmail.com'::varchar, 'Никитинская 13'::varchar);
+
+INSERT INTO public.customers (id, last_name, first_name, second_name, phone, email, address)
+VALUES (2::integer, 'Речной'::varchar, 'Никита'::varchar, 'Афанасьевич'::varchar, 89274301233::bigint,
+        'nikita777@gmail.com'::varchar, 'Победы 14'::varchar);
+
+INSERT INTO public.customers (id, last_name, first_name, second_name, phone, email, address)
+VALUES (3::integer, 'Каменевский'::varchar, 'Алексей'::varchar, 'Алексеевич'::varchar, 89176542341::bigint,
+        'alexis1112111@gmail.com'::varchar, 'Литовская 112'::varchar);
+
+
+
+INSERT INTO public.measurement_units (id, measurement_units_name)
+VALUES (1::integer, 'кг'::char(20));
+
+INSERT INTO public.measurement_units (id, measurement_units_name)
+VALUES (2::integer, 'л'::char(20));
+
+
+
+INSERT INTO public.openings (id, type, width, height)
+VALUES (1::integer, 'оконные проемы'::varchar, 1.2::double precision, 1.5::double precision);
+
+INSERT INTO public.openings (id, type, width, height)
+VALUES (2::integer, 'дверные проемы внешние'::varchar, 1.5::double precision, 2.1::double precision);
+
+INSERT INTO public.openings (id, type, width, height)
+VALUES (3::integer, 'дверные проемы внутренние'::varchar, 3::double precision, 2.5::double precision);
+
+
+
+INSERT INTO public.user_status (id, name)
+VALUES (1::integer, 'активен'::varchar);
+
+INSERT INTO public.user_status (id, name)
+VALUES (2::integer, 'не активен'::varchar);
+
+
+
+
+
+INSERT INTO public.users (id, customer_id, last_name, first_name, second_name, phone, email, password, login, state_id)
+VALUES (1::integer, 1::bigint, 'Аббатов'::varchar, 'Андрей'::varchar, 'Иванович'::varchar, 89273221322::double precision,
+        'andreiva@gmail.com'::varchar, '123'::varchar, 'Аббатов'::varchar, 1::bigint);
+
+INSERT INTO public.users (id, customer_id, last_name, first_name, second_name, phone, email, password, login, state_id)
+VALUES (2::integer, 2::bigint, 'Речной'::varchar, 'Никита'::varchar, 'Афанасьевич'::varchar, 89274301233::double precision,
+        'nikita777@gmail.com'::varchar, '456'::varchar, 'Речной'::varchar, 2::bigint);
+
+INSERT INTO public.users (id, customer_id, last_name, first_name, second_name, phone, email, password, login, state_id)
+VALUES (3::integer, 3::bigint, 'Каменевский'::varchar, 'Алексей'::varchar, 'Алексеевич'::varchar, 89176542341::double precision,
+        'alexis1112111@gmail.com'::varchar, '789'::varchar, 'Каменевский'::varchar, 2::bigint);
+
+
+
+
+UPDATE public.users
+SET last_name = 'Виноградов'::varchar,
+    phone     = 89273221367::double precision,
+    email     = 'andreiva11@gmail.com'::varchar,
+    password  = '987'::varchar,
+    login     = 'Виноградов'::varchar
+WHERE id = 1::integer;
+
+UPDATE public.users
+SET last_name = 'Загорный'::varchar,
+    phone     = 89176542322::double precision,
+    email     = 'alexis676767@gmail.com'::varchar,
+    password  = '321'::varchar,
+    login     = 'Загорный'::varchar
+WHERE id = 3::integer;
+
+UPDATE public.users
+SET last_name = 'Рыбный'::varchar,
+    phone     = 89274301243::double precision,
+    email     = 'nikita333@gmail.com'::varchar,
+    password  = '654'::varchar,
+    login     = 'Рыбный'::varchar
+WHERE id = 2::integer;
+
+
+
+
+INSERT INTO public.users_group (id, title)
+VALUES (1::integer, 'Администратор'::varchar);
+
+INSERT INTO public.users_group (id, title)
+VALUES (2::integer, 'Менеджер'::varchar);
+
+INSERT INTO public.users_group (id, title)
+VALUES (3::integer, 'Руководитель'::varchar);
+
+
+
+
+INSERT INTO public.users_users_group (users_id, users_group_id)
+VALUES (1::integer, 1::integer);
+
+INSERT INTO public.users_users_group (users_id, users_group_id)
+VALUES (2::integer, 2::integer);
+
+INSERT INTO public.users_users_group (users_id, users_group_id)
+VALUES (3::integer, 3::integer);
+
+
+
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (1::integer, 'бетон'::varchar, 'бетон'::varchar, 'крыша'::varchar);
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (2::integer, 'селикатобетон'::varchar,  'селикатобетон'::varchar, 'фундамент'::varchar);
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (3::integer, 'керамзитобетон'::varchar, 'керамзитобетон'::varchar, 'стены'::varchar);
+
+
+
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (1::integer, 'бетон'::varchar, 1::integer, 1::integer, 60::double precision, 30::double precision,
+        3::double precision, 5400::double precision);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (2::integer, 'силикатобетон'::varchar, 1::integer, 2::integer, 100::double precision, 50::double precision,
+        3::double precision, 15000::double precision);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (3::integer, 'керамзитобетон'::varchar, 1::integer, 3::integer, 80::double precision, 40::double precision,
+        3::double precision, 9600::double precision);
+
+
+
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (1::integer, 1::integer, '2023-03-01'::date, 21000::double precision, 25000::double precision);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (2::integer, 2::integer, '2023-03-02'::date, 13000::double precision, 17500::double precision);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (3::integer, 3::integer, '2023-03-06'::date, 15500::double precision, 19000::double precision);
+
+
+
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (1::integer, 1::bigint, 'бетон'::varchar, 20::integer, 900::double precision, 'кг'::varchar,
+        18000::double precision);
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (2::integer, 2::bigint, 'селикатобетон'::varchar, 30::integer, 600::double precision, 'кг'::varchar,
+        18000::double precision);
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (3::integer, 3::bigint, 'керамзитобетон'::varchar, 40::integer, 500::double precision, 'кг'::varchar,
+        20000::double precision);
+
+
+
+
+
+INSERT INTO public.calculation (id, manager_id, address_object_constructions, number, created_date, results_id,
+                                calculation_state_id)
+VALUES (1::integer, 1::bigint, 'Московское шоссе 7'::varchar, 123::integer, '2023-03-07'::date, 1::bigint,
+        1::bigint);
+
+INSERT INTO public.calculation (id, manager_id, address_object_constructions, number, created_date, results_id,
+                                calculation_state_id)
+VALUES (2::integer, 2::bigint, 'Ученическая 34'::varchar, 456::integer, '2023-03-03'::date, 2::bigint, 2::bigint);
+
+INSERT INTO public.calculation (id, manager_id, address_object_constructions, number, created_date, results_id,
+                                calculation_state_id)
+VALUES (3::integer, 3::bigint, 'Транзитная 28'::varchar, 789::integer, '2023-03-02'::date, 3::bigint, 3::bigint);
+
+
+
+
+INSERT INTO public.structural_element_basement (id, results_id, perimeter_of_external_walls, internal_wall_length,
+                                                concrete_piles, concrete)
+VALUES (1::integer, 1::integer, 540::double precision, 90::double precision, '60'::varchar, 'бетон'::varchar);
+
+INSERT INTO public.structural_element_basement (id, results_id, perimeter_of_external_walls, internal_wall_length,
+                                                concrete_piles, concrete)
+VALUES (2::integer, 2::integer, 900::double precision, 150::double precision, '100'::varchar, 'бетон'::varchar);
+
+INSERT INTO public.structural_element_basement (id, results_id, perimeter_of_external_walls, internal_wall_length,
+                                                concrete_piles, concrete)
+VALUES (3::integer, 3::integer, 720::double precision, 120::double precision, '80'::varchar, 'бетон'::varchar);
+
+
+
+
+
+INSERT INTO public.structural_element_frame (id, results_id, amount_floor, floor_number, floor_height,
+                                             perimeter_of_external_walls, base_area, external_wall_thickness,
+                                             internal_wall_length, internal_wall_thickness, osb_external_wall,
+                                             steam_waterproofing_external_wall, windscreen_external_wall,
+                                             insulation_external_wall, overlap_thickness, osb_thickness,
+                                             steam_waterproofing_thickness, windscreen_thickness, insulation_thickness,
+                                             osb_internal_wal)
+VALUES (1::integer, 1::integer, 1::integer, 1::integer, 3::integer, 540::double precision, 1800::double precision,
+        0.2::double precision, 90::double precision, 0.4::double precision, 'OSB 10 мм'::varchar, 'Ондутис'::varchar,
+        'Ветро-влагозащитная мембрана Brane А'::varchar, 'Эковер 200 мм'::varchar, '0.2'::varchar, 'OSB 10 мм'::varchar,
+        'Ондутис'::varchar, 'Ветро-влагозащитная мембрана Brane А'::varchar, 'Эковер 200 мм'::varchar,
+        'OSB 10 мм'::varchar);
+
+INSERT INTO public.structural_element_frame (id, results_id, amount_floor, floor_number, floor_height,
+                                             perimeter_of_external_walls, base_area, external_wall_thickness,
+                                             internal_wall_length, internal_wall_thickness, osb_external_wall,
+                                             steam_waterproofing_external_wall, windscreen_external_wall,
+                                             insulation_external_wall, overlap_thickness, osb_thickness,
+                                             steam_waterproofing_thickness, windscreen_thickness, insulation_thickness,
+                                             osb_internal_wal)
+VALUES (2::integer, 2::integer, 1::integer, 1::integer, 3::integer, 900::double precision, 5000::double precision,
+        0.2::double precision, 150::double precision, 0.4::double precision, 'OSB 10 мм'::varchar, 'Ондутис'::varchar,
+        'Ветро-влагозащитная мембрана Brane А'::varchar, 'Эковер 200 мм'::varchar, '0.2'::varchar, 'OSB 10 мм'::varchar,
+        'Ондутис'::varchar, 'Ветро-влагозащитная мембрана Brane А'::varchar, 'Эковер 200 мм'::varchar,
+        'OSB 10 мм'::varchar);
+
+INSERT INTO public.structural_element_frame (id, results_id, amount_floor, floor_number, floor_height,
+                                             perimeter_of_external_walls, base_area, external_wall_thickness,
+                                             internal_wall_length, internal_wall_thickness, osb_external_wall,
+                                             steam_waterproofing_external_wall, windscreen_external_wall,
+                                             insulation_external_wall, overlap_thickness, osb_thickness,
+                                             steam_waterproofing_thickness, windscreen_thickness, insulation_thickness,
+                                             osb_internal_wal)
+VALUES (3::integer, 3::integer, 1::integer, 1::integer, 3::integer, 720::double precision, 3200::double precision,
+        0.2::double precision, 120::double precision, 0.4::double precision, 'OSB 10 мм'::varchar, 'Ондутис'::varchar,
+        'Ветро-влагозащитная мембрана Brane А'::varchar, 'Эковер 200 мм'::varchar, '0.2'::varchar, 'OSB 10 мм'::varchar,
+        'Ондутис'::varchar, 'Ветро-влагозащитная мембрана Brane А'::varchar, 'Эковер 200 мм'::varchar,
+        'OSB 10 мм'::varchar);
+
+
+INSERT INTO public.openings_in_a_structural_element_frame (id, structural_element_frame_id, openings_id, amount)
+VALUES (1::integer, 1::bigint, 1::bigint, 10::integer);
+
+INSERT INTO public.openings_in_a_structural_element_frame (id, structural_element_frame_id, openings_id, amount)
+VALUES (2::integer, 2::bigint, 2::bigint, 5::integer);
+
+INSERT INTO public.openings_in_a_structural_element_frame (id, structural_element_frame_id, openings_id, amount)
+VALUES (3::integer, 3::bigint, 3::bigint, 1::integer);
+
+
+
+
+
+ОБНОВИЛА
+
+
+UPDATE public.measurement_units
+SET measurement_units_name = 'м3'
+WHERE id = 2;
+
+UPDATE public.measurement_units
+SET measurement_units_name = 'м2'
+WHERE id = 1;
+
+
+
+UPDATE public.openings
+SET width  = 2,
+    height = 0.8
+WHERE id = 3;
+
+UPDATE public.openings
+SET width = 1.5
+WHERE id = 1;
+
+UPDATE public.openings
+SET width  = 2.1,
+    height = 1
+WHERE id = 2;
+
+
+
+
+
+UPDATE public.materials
+SET name                    = 'Доска 50*150*3000',
+    material_type           = 'Пиломатериал ',
+    structural_element_type = 'Каркас '
+WHERE id = 2;
+
+UPDATE public.materials
+SET name                    = 'Доска 50*200*3000',
+    material_type           = 'Пиломатериал ',
+    structural_element_type = 'Каркас '
+WHERE id = 3;
+
+UPDATE public.materials
+SET name                    = 'Доска 50*100*3000',
+    material_type           = 'Пиломатериал ',
+    structural_element_type = 'Каркас'
+WHERE id = 1;
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (4, 'Доска 50*250*3000', 'Пиломатериал ', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (5, 'Доска 50*300*3000', 'Пиломатериал ', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (6, 'Доска 50*100*6000', 'Пиломатериал ', 'Каркас');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (7, 'Доска 50*150*6000', 'Пиломатериал ', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (8, 'Доска 50*200*6000', 'Пиломатериал ', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (9, 'Доска 50*250*6000', 'Пиломатериал ', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (10, 'Доска 50*300*6000', 'Пиломатериал ', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (11, 'OSB 9 мм', 'OSB', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (12, 'OSB 10 мм', 'OSB', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (13, 'OSB 15 мм', 'OSB', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (14, 'OSB 18 мм', 'OSB', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (15, 'Кнауф ТеплоКнауф 100 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (16, 'Технониколь 100 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (17, 'Эковер 100 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (18, 'Эковер 150 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (19, 'Эковер 200 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (20, 'Фасад 200 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (21, 'Эковер 250 мм', 'Утеплитель', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (22, 'Ондутис', 'Пароизоляция', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (23, 'Пароизоляция Axton (b)', 'Пароизоляция', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (24, 'Пароизоляционная пленка Ютафол Н 96 Сильвер', 'Пароизоляция', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (25, 'Пароизоляция В', 'Пароизоляция', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (26, 'Ветро-влагозащитная мембрана Brane А', 'Ветрозащита', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (27, 'Паропроницаемая ветро-влагозащита A Optima', 'Ветрозащита', 'Каркас ');
+
+INSERT INTO public.materials (id, name, material_type, structural_element_type)
+VALUES (28, 'Гидро-ветрозащита Тип А', 'Ветрозащита', 'Каркас ');
+
+
+
+
+
+
+
+UPDATE public.material_characteristics
+SET name      = 'Доска 50*100*3000',
+    length    = 3,
+    width     = 0.1,
+    thickness = 0.05,
+    volume    = 2.49
+WHERE id = 1;
+
+UPDATE public.material_characteristics
+SET name      = 'Доска 50*150*3000',
+    length    = 3,
+    width     = 0.15,
+    thickness = 0.05,
+    volume    = 2.49
+WHERE id = 2;
+
+UPDATE public.material_characteristics
+SET name      = 'Доска 50*200*3000',
+    length    = 3,
+    width     = 0.2,
+    thickness = 0.05,
+    volume    = 0.53
+WHERE id = 3;
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (4, 'Доска 50*250*3000', 2, 4, 3, 0.25, 0.05, 2.49);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (5, 'Доска 50*300*3000', 2, 5, 3, 0.3, 0.05, 2.49);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (6, 'Доска 50*100*6000', 2, 6, 6, 0.1, 0.05, 2.49);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (7, 'Доска 50*150*6000', 2, 7, 6, 0.15, 0.05, 2.49);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (8, 'Доска 50*200*6000', 2, 8, 6, 0.2, 0.05, 2.4);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (9, 'Доска 50*250*6000', 2, 9, 6, 0.25, 0.05, 2.49);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (10, 'Доска 50*300*6000', 2, 10, 6, 0.3, 0.05, 2.49);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (11, 'OSB 9 мм', 1, 11, 0.09, 1, 1, 414);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (12, 'OSB 10 мм', 1, 12, 0.1, 1, 1, 878);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (13, 'OSB 15 мм', 1, 13, 0.15, 1, 1, 414);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (14, 'OSB 18 мм', 1, 14, 0.18, 1, 1, 414);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (15, 'Кнауф ТеплоКнауф 100 мм', 2, 15, 0.1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (16, 'Технониколь 100 мм', 2, 16, 0.1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (17, 'Эковер 100 мм', 2, 17, 0.1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (18, 'Эковер 150 мм', 2, 18, 0.15, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (19, 'Эковер 200 мм', 2, 19, 0.2, 1, 1, 24.64);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (20, 'Фасад 200 мм', 2, 20, 0.2, 1, 1, 36.93);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (21, 'Эковер 250 мм', 2, 21, 0.25, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (22, 'Ондутис', 1, 22, 1, 1, 1, 271.4);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (23, 'Пароизоляция Axton (b)', 1, 23, 1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (24, 'Пароизоляционная пленка Ютафол Н 96 Сильвер', 1, 24, 1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (25, 'Пароизоляция В', 1, 25, 1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (26, 'Ветро-влагозащитная мембрана Brane А', 1, 26, 1, 1, 1, 271.4);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (27, 'Паропроницаемая ветро-влагозащита A Optima', 1, 27, 1, 1, 1, null);
+
+INSERT INTO public.material_characteristics (id, name, measurement_unit_id, materials_id, length, width, thickness,
+                                             volume)
+VALUES (28, 'Гидро-ветрозащита Тип А', 1, 28, 1, 1, 1, null);
+
+
+
+
+
+
+UPDATE public.price_lists
+SET purchase_price = 12000,
+    selling_price  = 12000
+WHERE id = 2;
+
+UPDATE public.price_lists
+SET purchase_price = 12000,
+    selling_price  = 12000
+WHERE id = 1;
+
+UPDATE public.price_lists
+SET purchase_price = 12000,
+    selling_price  = 12000
+WHERE id = 3;
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (4, 4, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (5, 5, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (6, 6, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (7, 7, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (8, 8, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (9, 9, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (10, 10, '2023-03-06', 12000, 12000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (11, 11, '2023-03-06', 256, 256);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (12, 12, '2023-03-06', 288, 288);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (13, 13, '2023-03-06', 384, 384);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (14, 14, '2023-03-06', 480, 480);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (15, 15, '2023-03-06', 3000, 3000);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (16, 16, '2023-03-06', 3500, 3500);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (17, 17, '2023-03-06', 2800, 2800);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (18, 18, '2023-03-06', 2800, 2800);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (19, 19, '2023-03-06', 2800, 2800);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (20, 20, '2023-03-06', 3200, 3200);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (21, 21, '2023-03-06', 2800, 2800);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (22, 22, '2023-03-06', 33, 33);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (23, 23, '2023-03-06', 20, 20);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (24, 24, '2023-03-06', 21, 21);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (25, 25, '2023-03-06', 11, 11);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (26, 26, '2023-03-06', 57, 57);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (27, 27, '2023-03-06', 21, 21);
+
+INSERT INTO public.price_lists (id, material_characteristics_id, date, purchase_price, selling_price)
+VALUES (28, 28, '2023-03-06', 53, 53);
+
+
+
+
+UPDATE public.results
+SET material_characteristics_id = 8,
+    material                    = 'Пиломатериал ',
+    amount                      = 5,
+    price                       = 12000,
+    measurement_unit            = 'м3',
+    full_price                  = 60000
+WHERE id = 3;
+
+UPDATE public.results
+SET material_characteristics_id = 1,
+    material                    = 'Пиломатериал ',
+    amount                      = 1,
+    price                       = 12000,
+    measurement_unit            = 'м3',
+    full_price                  = 12000
+WHERE id = 2;
+
+UPDATE public.results
+SET material_characteristics_id = 3,
+    material                    = 'Пиломатериал ',
+    amount                      = 5,
+    price                       = 12000,
+    measurement_unit            = 'м3',
+    full_price                  = 60000
+WHERE id = 1;
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (4, 20, 'Утеплитель', 74, 3200, 'м3', 236800);
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (5, 19, 'Утеплитель', 86, 2800, 'м3', 240800);
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (6, 12, 'ОСБ ', 1518, 288, 'м2', 437184);
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (7, 22, 'Парогидроизоляция', 543, 33, 'м2', 17919);
+
+INSERT INTO public.results (id, material_characteristics_id, material, amount, price, measurement_unit, full_price)
+VALUES (8, 26, 'Ветрозащита', 543, 57, 'м2', 30951);
+
+
+
+
+
+
+UPDATE public.structural_element_frame
+SET amount_floor                = 2,
+    perimeter_of_external_walls = 30,
+    base_area                   = 56,
+    internal_wall_length        = 15,
+    internal_wall_thickness     = 100,
+    overlap_thickness           = '200'
+WHERE id = 3;
+
+UPDATE public.structural_element_frame
+SET amount_floor                = 2,
+    perimeter_of_external_walls = 30,
+    base_area                   = 56,
+    internal_wall_length        = 15,
+    internal_wall_thickness     = 100,
+    overlap_thickness           = '200'
+WHERE id = 2;
+
+UPDATE public.structural_element_frame
+SET amount_floor                = 2,
+    perimeter_of_external_walls = 30,
+    base_area                   = 56,
+    internal_wall_length        = 15,
+    internal_wall_thickness     = 100,
+    overlap_thickness           = '200'
+WHERE id = 1;
+
+
+
+
+
+UPDATE public.openings_in_a_structural_element_frame
+SET amount = 1
+WHERE id = 2;
+
+UPDATE public.openings_in_a_structural_element_frame
+SET amount = 5
+WHERE id = 1;
+
+UPDATE public.openings_in_a_structural_element_frame
+SET amount = 5
+WHERE id = 3;
+
+
+
+
+
+
+

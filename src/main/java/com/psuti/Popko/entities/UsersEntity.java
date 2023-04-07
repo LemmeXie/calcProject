@@ -130,4 +130,9 @@ public class UsersEntity {
     public int hashCode() {
         return Objects.hash(id, customerId, lastName, firstName, secondName, phone, email, password, login, stateId);
     }
+
+    public boolean isEnabled() {
+        if (stateId == 1) return true;
+        else return false;
+    }
 }

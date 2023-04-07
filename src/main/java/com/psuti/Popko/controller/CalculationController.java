@@ -1,80 +1,54 @@
 package com.psuti.Popko.controller;
 
-
 import com.psuti.Popko.dao.CalculationEntityRepository;
 import com.psuti.Popko.entities.CalculationEntity;
+import com.psuti.Popko.entities.UsersEntity;
+import com.psuti.Popko.exceptions.AlreadyExistException;
+import com.psuti.Popko.exceptions.NotFoundException;
+import com.psuti.Popko.service.CalculationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityExistsException;
 import java.util.List;
-import java.util.UUID;
 
+@CrossOrigin
 @RequestMapping("/calc")
 @RestController
 public class CalculationController {
-    private final CalculationEntityRepository CalcRepository;
+    @Autowired
+    private CalculationService calculationService;
 
-    public CalculationController(CalculationEntityRepository CalcRepository) {
-        this.CalcRepository=CalcRepository;
+    public CalculationController(CalculationService calculationService) {
+        this.calculationService = calculationService;
     }
 
+    @PostMapping
+    public ResponseEntity addCalculation(@RequestBody CalculationEntity calculation) {
+        try{
+            calculationService.createCalc(calculation);
+            return ResponseEntity.ok("Расчет сохранен успешно");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body("Успешно получена ошибка: "+calculation);
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity getCalculationById(@PathVariable Integer id){
+        try{
+            return ResponseEntity.ok(calculationService.findCalcById(id));
+        }catch (NotFoundException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Успешно получена ошибка");
+        }
+    }
     @GetMapping("/all")
-public List<CalculationEntity> getAll(){return CalcRepository.findAll();}
-//    @GetMapping("/reg")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
-//    @GetMapping("/login")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
-//    @GetMapping("/casts")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
-//    @GetMapping("/casts")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
-//    @GetMapping("/casts")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
-//    @GetMapping("/casts")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
-//    @GetMapping("/casts")
-//    public List<Cast> getAll(){return CastRepository.findAll();}
+    public ResponseEntity getAll(){
+        try{
+            return ResponseEntity.ok(calculationService.getAll());
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Успешно получена ошибка");
+        }
+    }
 
-//    @GetMapping("/{id}")
-//    public Cast getById(@PathVariable("id") UUID id) {
-//        return CastRepository.findById(id).get();
-//    }
-//    @GetMapping("/{name}")
-//    public List<Cast> getByName(@PathVariable("name")String name)
-//    {
-//        return CastRepository.findByName(name);
-//    }
-//
-//    @PostMapping
-//    public Cast create(@RequestBody Cast cast) {
-//        UUID id = cast.getId();
-//        if (id != null) {
-//            if (CastRepository.existsById(id)) {
-//                throw new EntityExistsException("Cast already exists");
-//            }
-//        }
-//        if (cast.getName().isEmpty()) {
-//            throw new EntityExistsException("Name empty");
-//        }
-//        if (!UserRepository.findByFirstname(cast.user.getFirstname()).isEmpty()) {
-//            userRestController.create(cast.user);
-//        }
-//        if (!FilmRepository.findByName(cast.film.getName()).isEmpty()) {
-//            filmRestController.create(cast.film);
-//        }
-//        return CastRepository.save(cast);
-//    }
-//
-//    @PutMapping
-//    public Cast update(@RequestBody Cast cast) {
-//        if (CastRepository.existsById(cast.getId())) {
-//            return CastRepository.save(cast);
-//        }
-//        throw new EntityExistsException("Cast '" + cast.getName() + "' doesn't exists");
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void remove(@PathVariable("id") UUID id) {
-//        CastRepository.deleteById(id);
-//    }
 }
